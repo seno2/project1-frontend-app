@@ -111,3 +111,44 @@ window.samplevalue;
 5
 
 誤字・脱字が多かった
+
+function sum() {
+ var total = 0;
+for (var counter =1; counter <= 10; counter++) {
+total += counter;
+}
+window.alert(total);
+}
+undefined
+sum();
+undefined
+function sum(rangeTo) {
+ var total =0;
+for (var counter = 1; counter <= rangeTo; counter++) {
+total += counter;
+}                                                     }
+window.alert(total);
+
+VM436:6 Uncaught ReferenceError: total is not defined
+    at <anonymous>:6:14
+(anonymous) @ VM436:6
+function sum(rangeTo) {
+ var total =0;
+for (var counter = 1; counter <= rangeTo; counter++) {
+total += counter;
+}                                                     
+window.alert(total);
+}   
+undefined
+sum();
+undefined
+function sum(rangeFrom, rangeTo) {
+var total = 0;
+for (var counter =rangeFrom; counter <= rangeTo; counter++) {
+total += counter;
+}
+window.alert(total);
+}
+undefined
+sum(1,10);
+undefined
