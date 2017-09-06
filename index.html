@@ -1,58 +1,90 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+     <title>html 用語問題</title>
+    <link rel ="stylesheet" href="style.css">
+<script type="text/javascript">
+myQA = new Array(
+  "見出し要素"    , "h",
+  "段落要素"        , "p",
+  "強制改行"      , "br",
+  "水平罫線"        , "hr",
+  "順不同リスト"    , "ul",
+  "番号順リスト"        , "ol",
+  "リスト項目"        , "li",
+  "定義リスト"      , "dl",
+  "用語"        , "dt",
+  "用語説明", "dd",
+  "強調"        , "em",
+  "強い強調"        , "strong",
+  "上付き文字"        , "sup",
+  "下付き文字"        , "sub",
+    "打ち消し線付き"        , "del",
+  "画像を挿入する要素"        , "img",
+    "アンカー"        , "a",
+      "文書の制作者などを示す要素"        , "address",
+  "コピーライト表記を示す要素"        , "small",
+  "表組みを作るための要素"        , "table",
+  "行:table row"        , "tr",
+  "見出し:table header"        , "th",
+  "内容:table data"        , "td",
+  "横に結合"        , "colspan",
+      "縦に結合"        , "rowspan",
+        "ブロック"        , "div",
+          "インライン"        , "span",
+            "引用"        , "cite",
+              "該当部分をハイライト表示"        , "mark",
+);
 
-    <!-- Bootstrap 4のCSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+myNowCnt  = 0;
+myLastCnt = myQA.length / 2;
+myQAno    = new Array(myLastCnt);
 
-    <!-- 日本語フォント用の設定 -->
-    <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" />
-    <style>
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Noto Sans Japanese", "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, Meiryo, sans-serif;
+function myQuesInit(){
+  for (i=0; i<myLastCnt; i++) myQAno[i] = i;
+  for (i=0; i<500; i++){
+    my1 = Math.floor( Math.random() * myLastCnt );
+    my2 = Math.floor( Math.random() * myLastCnt );
+    myBackup = myQAno[my1];
+    myQAno[my1] = myQAno[my2];
+    myQAno[my2] = myBackup;
+  }
+}
+
+function myQues(){
+  if ( myNowCnt==0 ) myQuesInit();
+  myA = prompt("\n問題 : "+myQA[myQAno[myNowCnt]*2],"");
+  if ( myA != null ){
+    if ( myA == myQA[myQAno[myNowCnt]*2+1] ){
+      if (myNowCnt==myLastCnt-1){
+        myNowCnt=0;
+        alert("問題終了　お疲れ様でした");
+      }else{
+        alert("正解です");
+        myNowCnt++;
+        myQues();
       }
-    </style>
-
-    <!-- タイトル -->
-    <title>テクノロジー（藤原）サンプル</title>
-  </head>
-
-  <body>
-    <div class="container">  <!-- Bootstrap 4用のタグ -->
-
-      <!-- 自分用のHTMLをここに書く -->
-
-      <h1>Hello, world!</h1>
-
-      <p>これはHTMLのサンプルです。</p>
-
-      <h2>入力</h2>
-      <form name="mainForm">
-        <div class="form-group">
-          <label for="input1">入力1</label>
-          <input id="input1" class="form-control" type="text" onchange="answer()"/>
-        </div>
-
-        <div class="form-group">
-          <label for="input2">入力2</label>
-          <input id="input2" class="form-control" type="text" onchange="answer()"/>
-        </div>
-      </form>
-
-      <h2>出力</h2>
-      <p id="output">ここに出力したい</p>
-
-      <!-- 自分用のHTMLはここまで -->
-
-    </div>  <!-- Bootstrap 4用のタグ -->
-
-    <!-- 外部のJavaScriptライブラリ -->
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-
- <script src="main.js"></script>
+    }else{
+      alert("はずれ　答えは "+myQA[myQAno[myNowCnt]*2+1]+" です");
+      myQues();
+    }
+  }else{
+    myNowCnt=0;
+    alert("お疲れ様でした");
+  }
+}
+</script>
+</head>
+<body>
+<form name="myForm">
+  <div style="position:absolute; top:200px; left:580px;">
+<input type="button" value="問題を始める" onclick="myQues()">
+</div>
+</form>
+<center>
+  <h1>html 用語問題</h1>
+</center>
   </body>
 </html>
